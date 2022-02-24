@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  Container,
+  Paper,
+  useMediaQuery,
+  createTheme,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
+import "./style/style.scss";
+import Main from "./components/Main";
 
 function App() {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const THEME = createTheme({
+    palette: { mode: prefersDarkMode ? "dark" : "light" },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={THEME}>
+      <Paper id="main-container" square>
+        <header id="main-header">
+          <Container>
+            <Typography variant="h4" className="logo">
+              Convert Image
+            </Typography>
+          </Container>
+        </header>
+        <Container>
+          <Main />
+        </Container>
+      </Paper>
+    </ThemeProvider>
   );
 }
 
